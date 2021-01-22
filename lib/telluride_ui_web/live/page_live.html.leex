@@ -1,48 +1,42 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace-of-mind from prototype to production</p>
-
-  <form phx-change="suggest" phx-submit="search">
-    <input type="text" name="q" value="<%= @query %>" placeholder="Live dependency search" list="results" autocomplete="off"/>
-    <datalist id="results">
-      <%= for {app, _vsn} <- @results do %>
-        <option value="<%= app %>"><%= app %></option>
-      <% end %>
-    </datalist>
-    <button type="submit" phx-disable-with="Searching...">Go to Hexdocs</button>
-  </form>
-</section>
-
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.5/CHANGELOG.md">v1.5 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-    </ul>
-  </article>
-</section>
+<div class="m-4 bg-indigo-50">
+  <div class="bg-purple-700 text-white">
+    <h1>Producers</h1>
+  </div>
+  <div class="flex flex-wrap justify-center">
+    <div class="m-4 h-16 w-16 bg-purple-700 text-4xl text-center">1</div>
+    <div class="m-4 h-16 w-16 bg-purple-700 text-4xl text-center">2</div>
+  </div>
+</div>
+<div class="m-4 bg-indigo-50">
+  <div class="bg-green-700 text-white">
+    <h1>Processors</h1>
+  </div>
+  <div class="flex flex-wrap justify-center">
+    <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center">1</div>
+    <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center">2</div>
+    <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center">3</div>
+    <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center">4</div>
+  </div>
+</div>
+<div class="m-4 bg-indigo-50">
+  <div class="bg-blue-400 text-white">
+    <h1>Batchers</h1>
+  </div>
+  <div class="flex flex-wrap justify-center">
+    <div class="m-4 h-16 w-16 bg-blue-400 text-4xl text-center">1</div>
+    <div class="m-4 h-16 w-16 bg-blue-400 text-4xl text-center">2</div>
+  </div>
+</div>
+<div class="m-4 bg-indigo-50">
+  <div class="bg-yellow-500 text-white">
+    <h1>Batch Processors</h1>
+  </div>
+  <div class="flex flex-wrap justify-center">
+    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">1</div>
+    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">2</div>
+    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">3</div>
+    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">4</div>
+    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">5</div>
+    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">6</div>
+  </div>
+</div>
