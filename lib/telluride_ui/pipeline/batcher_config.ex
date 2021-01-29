@@ -8,6 +8,10 @@ defmodule Telluride.Pipeline.BatcherConfig do
     field :processor_count, :integer
   end
 
+  def new do
+    %BatcherConfig{batch_key: "", processor_count: 1}
+  end
+
   @doc false
   def creation_changeset(%BatcherConfig{} = batcher_config, attrs) do
     batcher_config

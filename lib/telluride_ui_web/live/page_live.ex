@@ -1,12 +1,14 @@
 defmodule TellurideWeb.PageLive do
   use TellurideWeb, :live_view
 
+  alias Ecto.Changeset
+  alias Telluride.Pipeline.BatcherConfig
   alias Telluride.Pipeline.PipelineConfig
 
   @impl true
   def mount(_params, _session, socket) do
-    config = %PipelineConfig{producer_count: 1, processor_count: 1}
-    {:ok, assign(socket, %{changeset: PipelineConfig.changeset(config)})}
+    changeset = Changeset.change(PipelineConfig.new())
+    {:ok, assign(socket, %{changeset: changeset})}
   end
 
   @impl true
@@ -29,6 +31,25 @@ defmodule TellurideWeb.PageLive do
       |> Map.put(:action, :insert)
       IO.puts("changeset=#{inspect changeset, pretty: true}")
       {:noreply, assign(socket, changeset: changeset)}
+  end
+
+  @impl true
+  def handle_event("add_batcher", _value, %{assigns: %{changeset: changeset}} = socket) do
+    IO.puts("PageLive got add_batcher event with changeset #{inspect changeset.data, pretty: true}")
+    pipelineConfig = changeset.data
+    new_batchers = [BatcherConfig.new() | pipelineConfig.batchers]
+    changeset =
+      pipelineConfig
+      |> PipelineConfig.changeset(%{})
+      |> Changeset.put_embed(:batchers, new_batchers)
+    IO.puts("updated changeset = #{inspect changeset, pretty: true}")
+    {:noreply, assign(socket, changeset: changeset)}
+  end
+
+  @impl true
+  def handle_event("delete_batcher", value, socket) do
+    IO.puts("PageLive got delete_batcher event with value #{inspect value, pretty: true}")
+    {:noreply, socket}
   end
 
 end

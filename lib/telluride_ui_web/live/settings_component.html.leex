@@ -44,17 +44,42 @@
                 <p><%= error_tag2 f, :processor_count %></p>
               </div>
 
-              <div>
+              <div class="mb-3">
+                <div class="relative inline-flex">
+                  <div class="relative inline-flex pt-1 pr-3">
+                    <p class="text-sm font-medium text-gray-700">Batchers</p>
+                  </div>
+                  <div class="relative inline-flex">
+                    <button type="button" phx-click="add_batcher" class="p-0.5 border border-transparent rounded-full shadow-sm bg-green-700 text-white ">
+                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
                 <%= inputs_for f, :batchers, fn fp -> %>
-                  <%= label fp, :batch_key %>
-                  <%= text_input fp, :batch_key %>
-                  <%= error_tag fp, :batch_key %>
-                <% end %>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div class="grid grid-cols-5 gap-3 ml-3 px-6 pt-3 pb-3 border-2 border-gray-300 border-dashed rounded-md">
+                    <div class="col-span-2">
+                      <%= label fp, :batch_key, "Batch Key", class: "block text-sm font-medium text-gray-700" %>
+                      <%= text_input fp, :batch_key, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+                    </div>
+                    <div class="col-span-2">
+                      <%= label fp, :batch_processor_count, "Processor Count", class: "block text-sm font-medium text-gray-700" %>
+                      <%= text_input fp, :batch_processor_count, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+                    </div>
+                    <div class="col-span-1 pt-5 pl-3">
+                      <button type="button" phx-click="delete_batcher" phx-value-batch_key="fp.batch_key" class="p-0.5 border border-transparent rounded-full shadow-sm text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-200">
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                        </svg>
+                     </button>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <% end %>
 
-              <div class="mt-6 flex flex-col justify-stretch">
-                <%= submit "Save", phx_disable_with: "Saving...", class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
-              </div>
             </form>
           </div>
         </div>
