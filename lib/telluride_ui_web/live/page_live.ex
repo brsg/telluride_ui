@@ -2,7 +2,6 @@ defmodule TellurideWeb.PageLive do
   use TellurideWeb, :live_view
 
   alias Ecto.Changeset
-  alias Telluride.Pipeline.BatcherConfig
   alias Telluride.Pipeline.PipelineConfig
 
   @impl true
@@ -13,43 +12,30 @@ defmodule TellurideWeb.PageLive do
 
   @impl true
   def handle_event("validate", args, socket) do
-    IO.puts("PageLive got validate event with args #{inspect args, pretty: true}")
+    # IO.puts("PageLive got validate event with args #{inspect args, pretty: true}")
     changeset =
       %PipelineConfig{}
       |> PipelineConfig.changeset(args)
       |> Map.put(:action, :insert)
-    IO.puts("validate sending changeset=#{inspect changeset, pretty: true}")
+    # IO.puts("validate sending changeset=#{inspect changeset, pretty: true}")
     {:noreply, assign(socket, changeset: changeset)}
   end
 
   @impl true
   def handle_event("save", args, socket) do
-    IO.puts("PageLive got save event with args #{inspect args, pretty: true}")
+    # IO.puts("PageLive got save event with args #{inspect args, pretty: true}")
     changeset =
       %PipelineConfig{}
       |> PipelineConfig.changeset(args)
       |> Map.put(:action, :insert)
-      IO.puts("changeset=#{inspect changeset, pretty: true}")
+      # IO.puts("changeset=#{inspect changeset, pretty: true}")
       {:noreply, assign(socket, changeset: changeset)}
   end
 
   @impl true
-  def handle_event("add_batcher", _value, %{assigns: %{changeset: changeset}} = socket) do
-    IO.puts("PageLive got add_batcher event with changeset #{inspect changeset.data, pretty: true}")
-    pipelineConfig = changeset.data
-    new_batchers = [BatcherConfig.new() | pipelineConfig.batchers]
-    changeset =
-      pipelineConfig
-      |> PipelineConfig.changeset(%{})
-      |> Changeset.put_embed(:batchers, new_batchers)
-    IO.puts("updated changeset = #{inspect changeset, pretty: true}")
-    {:noreply, assign(socket, changeset: changeset)}
-  end
-
-  @impl true
-  def handle_event("delete_batcher", value, socket) do
-    IO.puts("PageLive got delete_batcher event with value #{inspect value, pretty: true}")
-    {:noreply, socket}
+  def handle_event(other, args, socket) do
+    IO.puts("PageLive got unhandled #{inspect other} event with args #{inspect args, pretty: true}")
+      {:noreply, socket}
   end
 
 end
