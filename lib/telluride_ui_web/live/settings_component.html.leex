@@ -4,7 +4,9 @@
 
           <!-- Activity Feed -->
           <div class="mt-3 flow-root">
-            <%= f = form_for @changeset, "#", [phx_change: :validate, phx_submit: :save] %>
+            <%= f = form_for @changeset, "#", 
+                    phx_change: :validate, 
+                    phx_submit: :save %>
 
               <div x-data="{ haserror: <%= has_error f, :producer_concurrency %> }" class="mb-3">
                 <label for="producer_concurrency" class="block text-sm font-medium text-gray-700">Producer Count</label>

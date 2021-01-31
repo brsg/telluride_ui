@@ -30,7 +30,6 @@ defmodule Telluride.Pipeline.PipelineConfig do
 
   @doc false
   def changeset(%PipelineConfig{} = pipeline_config, attrs \\ %{}) do
-    IO.puts("PipelineConfig.changeset attrs #{inspect(attrs)}")
 
     pipeline_config
     |> cast(attrs, [

@@ -1,11 +1,16 @@
+<pre>
+<%= inspect @pipeline, pretty: true %>
+</pre>
+
           <div class="bg-white shadow sm:rounded-lg p-3">
             <div class="m-4 bg-indigo-50">
               <div class="bg-purple-700 text-white text-center">
                 <h1>Producers</h1>
               </div>
               <div class="flex flex-wrap justify-center">
+                <%= for num <- 1..@pipeline.producer_concurrency do %>
                 <div class="m-4 h-16 w-16 bg-purple-700 text-4xl text-center">1</div>
-                <div class="m-4 h-16 w-16 bg-purple-700 text-4xl text-center">2</div>
+                <% end %>
               </div>
             </div>
             <div class="m-4 bg-indigo-50">
@@ -13,10 +18,9 @@
                 <h1>Processors</h1>
               </div>
               <div class="flex flex-wrap justify-center">
+                <%= for num <- 1..@pipeline.processor_concurrency do %>
                 <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center">1</div>
-                <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center">2</div>
-                <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center">3</div>
-                <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center">4</div>
+                <% end %>
               </div>
             </div>
             <div class="flex flex-wrap justify-center">
