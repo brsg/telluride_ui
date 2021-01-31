@@ -3,31 +3,39 @@
 </pre>
 
           <div class="bg-white shadow sm:rounded-lg p-3">
+
+            <!-- Producers -->
             <div class="m-4 bg-indigo-50">
               <div class="bg-purple-700 text-white text-center">
                 <h1>Producers</h1>
               </div>
               <div class="flex flex-wrap justify-center">
                 <%= for num <- 1..@pipeline.producer_concurrency do %>
-                <div class="m-4 h-16 w-16 bg-purple-700 text-4xl text-center">1</div>
+                <div class="m-4 h-16 w-16 bg-purple-700 text-4xl text-center"><%= num %></div>
                 <% end %>
               </div>
             </div>
+
+            <!-- Processors -->
             <div class="m-4 bg-indigo-50">
               <div class="bg-green-700 text-white text-center">
                 <h1>Processors</h1>
               </div>
               <div class="flex flex-wrap justify-center">
                 <%= for num <- 1..@pipeline.processor_concurrency do %>
-                <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center">1</div>
+                <div class="m-4 h-16 w-16 bg-green-700 text-4xl text-center"><%= num %></div>
                 <% end %>
               </div>
             </div>
+
+            <!-- Batchers -->
             <div class="flex flex-wrap justify-center">
+
+              <!-- Batcher 1 -->
               <div>
                 <div class="m-4 bg-indigo-50">
                   <div class="bg-blue-400 text-white text-center">
-                    <h1>Batcher</h1>
+                    <h1>Batcher 1</h1>
                   </div>
                   <div class="flex flex-wrap justify-center">
                     <div class="m-4 h-16 w-16 bg-blue-400 text-4xl text-center">1</div>
@@ -38,15 +46,18 @@
                     <h1>Batch Processors</h1>
                   </div>
                   <div class="flex flex-wrap justify-center">
-                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">1</div>
-                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">2</div>
+                    <%= for num <- 1..@pipeline.batcher1_concurrency do %>
+                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center"><%= num %></div>
+                    <% end %>
                   </div>
                 </div>
               </div>
+
+              <!-- Batcher 2 -->
               <div>
                 <div class="m-4 bg-indigo-50">
                   <div class="bg-blue-400 text-white text-center">
-                    <h1>Batcher</h1>
+                    <h1>Batcher 2</h1>
                   </div>
                   <div class="flex flex-wrap justify-center">
                     <div class="m-4 h-16 w-16 bg-blue-400 text-4xl text-center">2</div>
@@ -57,12 +68,34 @@
                     <h1>Batch Processors</h1>
                   </div>
                   <div class="flex flex-wrap justify-center">
-                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">3</div>
-                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">4</div>
-                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">5</div>
-                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center">6</div>
+                    <%= for num <- 1..@pipeline.batcher2_concurrency do %>
+                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center"><%= num %></div>
+                    <% end %>
                   </div>
                 </div>
               </div>
+
+              <!-- Batcher 3 -->
+              <div>
+                <div class="m-4 bg-indigo-50">
+                  <div class="bg-blue-400 text-white text-center">
+                    <h1>Batcher 3</h1>
+                  </div>
+                  <div class="flex flex-wrap justify-center">
+                    <div class="m-4 h-16 w-16 bg-blue-400 text-4xl text-center">2</div>
+                  </div>
+                </div>
+                <div class="m-4 bg-indigo-50">
+                  <div class="bg-yellow-500 text-white text-center">
+                    <h1>Batch Processors</h1>
+                  </div>
+                  <div class="flex flex-wrap justify-center">
+                    <%= for num <- 1..@pipeline.batcher3_concurrency do %>
+                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center"><%= num %></div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
