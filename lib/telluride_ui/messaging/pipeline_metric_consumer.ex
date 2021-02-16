@@ -113,6 +113,7 @@ defmodule Telluride.Messaging.PipelineMetricConsumer do
     case Jason.decode(payload) do
       {:ok, event_info} ->
         IO.puts("PipelineMetricConsumer.consume - received #{inspect event_info}")
+        Telluride.PubSub.PipelineMetricsTopic.publish(event_info)
         AMQP.Basic.ack(channel, delivery_tag)
       {:error, reason} ->
         Basic.reject channel, delivery_tag, requeue: false
