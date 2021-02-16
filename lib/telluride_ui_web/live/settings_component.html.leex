@@ -138,52 +138,6 @@
                 </div>
               </div>
 
-              <div class="rounded-md shadow-sm mb-3">
-                <div class="px-2 pt-2 pb-3 border-2 border-gray-300 border-dashed rounded-md">
-                  <div class="mb-2">
-                    <p class="text-sm font-medium text-gray-700">Batcher 3</p>
-                  </div>
-                  <div class="grid grid-cols-2 gap-2">
-                    <div x-data="{ haserror: <%= has_error f, :batcher3_concurrency %> }" class="col-span-1">
-                      <label for="batcher3_concurrency" class="block text-sm font-medium text-gray-500">Concurrency</label>
-                      <div class="mt-1 relative rounded-md shadow-sm">
-                        <input
-                          type="text" 
-                          name="batcher3_concurrency" 
-                          id="batcher3_concurrency" 
-                          value="<%= input_value(f, :batcher3_concurrency) %>"
-                          class="block w-full pr-10 focus:outline-none sm:text-sm rounded-md" 
-                          :class="{ 'border-red-300' : haserror, 'text-red-900' : haserror, 'placeholder-red-300' : haserror, 'focus:outline-none' : haserror, 'focus:ring-red-500' : haserror, 'focus:border-red-500' : haserror }">
-                        <div x-show="haserror" class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                          <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                          </svg>
-                        </div>
-                      </div>
-                      <p><%= error_tag2 f, :batcher3_concurrency %></p>
-                    </div>
-                    <div x-data="{ haserror: <%= has_error f, :batcher3_batch_size %> }" class="col-span-1">
-                      <label for="batcher1_batch_size" class="block text-sm font-medium text-gray-500">Batch Size</label>
-                      <div class="mt-1 relative rounded-md shadow-sm">
-                        <input
-                          type="text" 
-                          name="batcher3_batch_size" 
-                          id="batcher3_batch_size" 
-                          value="<%= input_value(f, :batcher3_batch_size) %>"
-                          class="block w-full pr-10 focus:outline-none sm:text-sm rounded-md" 
-                          :class="{ 'border-red-300' : haserror, 'text-red-900' : haserror, 'placeholder-red-300' : haserror, 'focus:outline-none' : haserror, 'focus:ring-red-500' : haserror, 'focus:border-red-500' : haserror }">
-                        <div x-show="haserror" class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                          <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                          </svg>
-                        </div>
-                      </div>
-                      <p><%= error_tag2 f, :batcher3_batch_size %></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div class="pt-5">
                 <div class="flex justify-center">
                   <%= reset "Cancel", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>

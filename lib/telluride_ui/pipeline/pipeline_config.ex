@@ -9,10 +9,8 @@ defmodule Telluride.Pipeline.PipelineConfig do
     field :processor_concurrency, :integer
     field :batcher1_concurrency, :integer
     field :batcher2_concurrency, :integer
-    field :batcher3_concurrency, :integer
     field :batcher1_batch_size, :integer
     field :batcher2_batch_size, :integer
-    field :batcher3_batch_size, :integer
   end
 
   def new do
@@ -21,10 +19,8 @@ defmodule Telluride.Pipeline.PipelineConfig do
       processor_concurrency: 1,
       batcher1_concurrency: 1,
       batcher2_concurrency: 1,
-      batcher3_concurrency: 1,
       batcher1_batch_size: 1,
       batcher2_batch_size: 1,
-      batcher3_batch_size: 1
     }
   end
 
@@ -37,20 +33,16 @@ defmodule Telluride.Pipeline.PipelineConfig do
       :processor_concurrency,
       :batcher1_concurrency,
       :batcher2_concurrency,
-      :batcher3_concurrency,
       :batcher1_batch_size,
       :batcher2_batch_size,
-      :batcher3_batch_size
     ])
     |> validate_required([
       :producer_concurrency,
       :processor_concurrency,
       :batcher1_concurrency,
       :batcher2_concurrency,
-      :batcher3_concurrency,
       :batcher1_batch_size,
       :batcher2_batch_size,
-      :batcher3_batch_size
     ])
   end
 end

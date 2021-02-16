@@ -32,7 +32,7 @@
             <div class="flex flex-wrap justify-center">
 
               <!-- Batcher 1 -->
-              <div>
+              <div class="w-1/2">
                 <div class="m-4 bg-indigo-50">
                   <div class="bg-blue-400 text-white text-center">
                     <h1>Batcher 1</h1>
@@ -54,7 +54,7 @@
               </div>
 
               <!-- Batcher 2 -->
-              <div>
+              <div class="w-1/2">
                 <div class="m-4 bg-indigo-50">
                   <div class="bg-blue-400 text-white text-center">
                     <h1>Batcher 2</h1>
@@ -69,28 +69,6 @@
                   </div>
                   <div class="flex flex-wrap justify-center">
                     <%= for num <- 1..@pipeline.batcher2_concurrency do %>
-                    <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center"><%= num %></div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Batcher 3 -->
-              <div>
-                <div class="m-4 bg-indigo-50">
-                  <div class="bg-blue-400 text-white text-center">
-                    <h1>Batcher 3</h1>
-                  </div>
-                  <div class="flex flex-wrap justify-center">
-                    <div class="m-4 h-16 w-16 bg-blue-400 text-4xl text-center">2</div>
-                  </div>
-                </div>
-                <div class="m-4 bg-indigo-50">
-                  <div class="bg-yellow-500 text-white text-center">
-                    <h1>Batch Processors</h1>
-                  </div>
-                  <div class="flex flex-wrap justify-center">
-                    <%= for num <- 1..@pipeline.batcher3_concurrency do %>
                     <div class="m-4 h-16 w-16 bg-yellow-500 text-4xl text-center"><%= num %></div>
                     <% end %>
                   </div>
