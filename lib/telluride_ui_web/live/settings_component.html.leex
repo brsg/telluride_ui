@@ -9,7 +9,7 @@
                     phx_submit: :save %>
 
               <div x-data="{ haserror: <%= has_error f, :producer_concurrency %> }" class="mb-3">
-                <label for="producer_concurrency" class="block text-sm font-medium text-gray-700">Producer Count</label>
+                <label for="producer_concurrency" class="block text-sm font-medium text-gray-700">Producer Concurrency</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                   <input
                     type="text" 
@@ -28,7 +28,7 @@
               </div>
 
               <div x-data="{ haserror: <%= has_error f, :processor_concurrency %> }" class="mb-3">
-                <label for="processor_concurrency" class="block text-sm font-medium text-gray-700">Processor Count</label>
+                <label for="processor_concurrency" class="block text-sm font-medium text-gray-700">Processor Concurrency</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                   <input
                     type="text"
