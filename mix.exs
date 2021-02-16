@@ -46,7 +46,8 @@ defmodule Telluride.MixProject do
       {:telemetry_poller, "~> 0.5"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.4"}
+      {:plug_cowboy, "~> 2.4"},
+      {:amqp, "~> 1.0" },
     ]
   end
 
