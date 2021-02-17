@@ -15,7 +15,8 @@ defmodule Telluride.Application do
           Telluride.Messaging.AMQPConnectionManager,
           :start_link,
           [[
-            Telluride.Messaging.PipelineMetricConsumer
+            Telluride.Messaging.PipelineMetricConsumer,
+            Telluride.Messaging.PipelineConfigProducer
           ]]
         }
       }
