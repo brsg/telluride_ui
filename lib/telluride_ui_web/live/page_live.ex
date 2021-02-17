@@ -1,77 +1,124 @@
 defmodule TellurideWeb.PageLive do
   use TellurideWeb, :live_view
 
+  import Ecto.Changeset
+
   alias Ecto.Changeset
-  alias Telluride.Pipeline.PipelineConfig
+  alias Telluride.Pipeline.Pipeline
   alias Telluride.PubSub.PipelineMetricsTopic
+  alias Telluride.Messaging.PipelineConfigProducer
+
+  ################################################################################
+  # LiveView callbacks
+  ################################################################################
 
   @impl true
   def mount(_params, _session, socket) do
     PipelineMetricsTopic.subscribe()
-    pipeline = PipelineConfig.new()
-    changeset = Changeset.change(pipeline)
-    {:ok, assign(socket, pipeline: pipeline, changeset: changeset)}
-  end
-
-  @impl true
-  def handle_info({:metric, event}, socket) do
-    %{
-      "call_count" => call_count, #293, 
-      "first_time" => first_time, #-576460750783249000, 
-      "last_duration" => last_duration, #260000, 
-      "last_time" => last_time, #-576460114617524115, 
-      "max_duration" => max_duration, #406000, 
-      "mean_duration" => mean_duration, #147621.16040955635, 
-      "min_duration" => min_duration, #43000, 
-      "msg_count" => msg_count, #297, 
-      "name" => name, #"sensor_batcher_one", 
-      "partition" => partition, #0
-    } = event
-
-    # I believe we spoke about mean_duration being the key for how to 
-    # paint the node.  < 1_000_000 microseconds is green, < 1_000_001
-    # and less than ??? is yellow, etc.
-
-    IO.puts("\nPageLive.handle_info(:metric) - event=#{inspect event}")
-    {:noreply, socket}
+    pipeline = Pipeline.new()
+    changeset = change(pipeline)
+    socket = socket
+    |> assign(:changeset, changeset)
+    |> assign(:pipeline, pipeline)
+    {:ok, socket}
   end
 
   @impl true
   def handle_event("validate", args, socket) do
-    IO.puts("\nPageLive.handle_event - event=validate, args=#{inspect args}")
+    IO.puts("handle_event(validate, #{inspect args})")
     changeset =
-      %PipelineConfig{}
-      |> PipelineConfig.changeset(args)
+      Pipeline.new()
+      |> Pipeline.changeset(args)
       |> Map.put(:action, :insert)
-    {:noreply, assign(socket, changeset: changeset)}
+    {:noreply, assign(socket, :changeset, changeset)}
   end
 
   @impl true
   def handle_event("save", args, socket) do
-    IO.puts("\nPageLive.handle_event - event=save, args=#{inspect args}")
-    changeset =
-      %PipelineConfig{}
-      |> PipelineConfig.changeset(args)
-      |> Map.put(:action, :insert)
-    socket =
-      socket
-      |> assign(:changeset, changeset)
-      |> assign_pipeline(changeset)
+    IO.puts("handle_event(save, #{inspect args})")
+    socket = case save_pipeline_config(args) do
+      {:ok, pipeline} ->
+        restart_pipeline(pipeline)
+        assign(socket, :pipeline, pipeline)
+      {:error, changeset} ->
+        assign(socket, :changeset, changeset)
+    end
     {:noreply, socket}
   end
-
-  defp assign_pipeline(socket, changeset) when changeset.valid? do
-    IO.puts("\nPageLive.assign_pipeline - changeset=#{inspect changeset, pretty: true}")
-    pipeline = Changeset.apply_changes(changeset)
-    assign(socket, pipeline: pipeline)
-  end
-
-  defp assign_pipeline(socket, changeset), do: socket
 
   @impl true
-  def handle_event(event, args, socket) do
-    IO.puts("\nPageLive.handle_event - event=#{inspect event}, args=#{inspect args}")
-    {:noreply, socket}
+  def handle_info({:metric, event}, socket) do
+    IO.puts("handle_info(:metric, #{inspect event})")
+    {:noreply, update_node_status(event, socket)}
   end
+
+  ################################################################################
+  # Private
+  ################################################################################
+
+  defp save_pipeline_config(args) do
+    case Pipeline.changeset(Pipeline.new(), args) do
+      %{valid?: true} = changeset -> 
+        changeset
+        |> apply_action(:insert)
+      changeset ->
+        changeset = Map.put(changeset, :action, :insert)
+        {:error, changeset}
+    end
+  end
+
+  def restart_pipeline(pipeline) do
+    message = %{
+      sensor_batcher_one_batch_size: pipeline.batcher1_batch_size,
+      sensor_batcher_one_concurrency: pipeline.batcher1_concurrency,
+      sensor_batcher_two_batch_size: pipeline.batcher2_batch_size,
+      sensor_batcher_two_concurrency: pipeline.batcher2_concurrency,
+      processor_concurrency: pipeline.processor_concurrency,
+      producer_concurrency: pipeline.producer_concurrency,
+      rate_limit_allowed: pipeline.rate_limit_allowed,
+      rate_limit_interval: pipeline.rate_limit_interval
+    }
+    PipelineConfigProducer.publish(message)
+  end
+
+  defp update_node_status(%{"node_type" => "producer", "partition" => partition, "mean_duration" => mean_duration} = event, socket) do
+    update_node_status("producer_#{partition}", event, socket)
+  end
+
+  defp update_node_status(%{"node_type" => "processor", "partition" => partition, "mean_duration" => mean_duration} = event, socket) do
+    update_node_status("processor_#{partition}", event, socket)
+  end
+
+  defp update_node_status(%{"node_type" => "batcher", "name" => "sensor_batcher_one", "partition" => partition, "mean_duration" => mean_duration} = event, socket) do
+    update_node_status("batcher_1", event, socket)
+  end
+
+  defp update_node_status(%{"node_type" => "batcher", "name" => "sensor_batcher_two", "partition" => partition, "mean_duration" => mean_duration} = event, socket) do
+    update_node_status("batcher_2", event, socket)
+  end
+
+  defp update_node_status(%{"node_type" => "batcher_processor", "name" => "sensor_batcher_one", "partition" => partition, "mean_duration" => mean_duration} = event, socket) do
+    update_node_status("batcher_1_processor_#{partition}", event, socket)
+  end
+
+  defp update_node_status(%{"node_type" => "batcher_processor", "name" => "sensor_batcher_two", "partition" => partition, "mean_duration" => mean_duration} = event, socket) do
+    update_node_status("batcher_2_processor_#{partition}", event, socket)
+  end
+
+  defp update_node_status(event, socket) do
+    IO.puts("\n\nupdate_node_status(#{inspect event, pretty: true}, socket}")
+    socket
+  end
+
+  defp update_node_status(key, %{"mean_duration" => mean_duration} = event, socket) do
+    status = compute_status(mean_duration)
+    pipeline = socket.assigns.pipeline
+    pipeline = put_in(pipeline.node_status[key], status)
+    assign(socket, :pipeline, pipeline)
+  end
+
+  defp compute_status(microseconds) when microseconds <= 100_000, do: "border-green-500"
+  defp compute_status(microseconds) when microseconds > 100_000 and microseconds < 200_000, do: "border-yellow-500"
+  defp compute_status(microseconds) when microseconds >= 200_000, do: "border-red-500"
 
 end
