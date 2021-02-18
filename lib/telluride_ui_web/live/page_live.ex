@@ -25,7 +25,7 @@ defmodule TellurideWeb.PageLive do
 
   @impl true
   def handle_event("validate", args, socket) do
-    IO.puts("handle_event(validate, #{inspect args})")
+    # IO.puts("handle_event(validate, #{inspect args})")
     changeset =
       Pipeline.new()
       |> Pipeline.changeset(args)
@@ -35,7 +35,7 @@ defmodule TellurideWeb.PageLive do
 
   @impl true
   def handle_event("save", args, socket) do
-    IO.puts("handle_event(save, #{inspect args})")
+    # IO.puts("handle_event(save, #{inspect args})")
     socket = case save_pipeline_config(args) do
       {:ok, pipeline} ->
         restart_pipeline(pipeline)
@@ -48,7 +48,7 @@ defmodule TellurideWeb.PageLive do
 
   @impl true
   def handle_info({:metric, event}, socket) do
-    IO.puts("handle_info(:metric, #{inspect event})")
+    # IO.puts("handle_info(:metric, #{inspect event})")
     {:noreply, update_node_status(event, socket)}
   end
 

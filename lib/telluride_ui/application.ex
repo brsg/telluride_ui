@@ -5,7 +5,6 @@ defmodule Telluride.Application do
 
   def start(_type, _args) do
     children = [
-      Telluride.Repo,
       TellurideWeb.Telemetry,
       {Phoenix.PubSub, name: Telluride.PubSub},
       TellurideWeb.Endpoint,

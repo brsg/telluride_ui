@@ -35,8 +35,6 @@ defmodule Telluride.MixProject do
     [
       {:phoenix, "~> 1.5.0"},
       {:phoenix_ecto, "~> 4.2"},
-      {:ecto_sql, "~> 3.5"},
-      {:postgrex, "~> 0.15.8"},
       {:phoenix_live_view, "~> 0.15.3"},
       {:floki, ">= 0.0.0", only: :test},
       {:phoenix_html, "~> 2.14"},
@@ -59,9 +57,7 @@ defmodule Telluride.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      setup: ["deps.get", "cmd npm install --prefix assets"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end

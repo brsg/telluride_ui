@@ -8,8 +8,7 @@
 use Mix.Config
 
 config :telluride_ui,
-  namespace: Telluride,
-  ecto_repos: [Telluride.Repo]
+  namespace: Telluride
 
 # Configures the endpoint
 config :telluride_ui, TellurideWeb.Endpoint,

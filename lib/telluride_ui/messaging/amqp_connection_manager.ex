@@ -27,7 +27,7 @@ defmodule Telluride.Messaging.AMQPConnectionManager do
 
   @impl
   def init(init_arg) do
-    Supervisor.start_link(init_arg, strategy: :one_for_one, name: SensorSimulator.Messaging.AMQPConsumerSupervisor)
+    Supervisor.start_link(init_arg, strategy: :one_for_one, name: Telluride.Messaging.AMQPConsumerSupervisor)
     establish_new_connection()
   end
 

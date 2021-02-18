@@ -1,15 +1,5 @@
 use Mix.Config
 
-# Configure your database
-config :telluride_ui, Telluride.Repo,
-  username: "telluride",
-  password: "telluride",
-  database: "telluride_ui_dev",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10,
-  port: 5444
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
