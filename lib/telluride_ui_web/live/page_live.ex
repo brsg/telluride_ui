@@ -117,8 +117,8 @@ defmodule TellurideWeb.PageLive do
     assign(socket, :pipeline, pipeline)
   end
 
-  defp compute_status(microseconds) when microseconds <= 100_000, do: "border-green-500"
-  defp compute_status(microseconds) when microseconds > 100_000 and microseconds < 200_000, do: "border-yellow-500"
-  defp compute_status(microseconds) when microseconds >= 200_000, do: "border-red-500"
+  defp compute_status(microseconds) when microseconds <= 100_000, do: "border-normal"
+  defp compute_status(microseconds) when microseconds > 100_000 and microseconds < 200_000, do: "border-warning"
+  defp compute_status(microseconds) when microseconds >= 200_000, do: "border-error"
 
 end
