@@ -7,7 +7,7 @@
 
       <div class="space-y-6 lg:col-start-3 lg:col-span-3">
         <section aria-labelledby="applicant-information-title">
-          <%= live_component @socket, TellurideWeb.PipelineComponent, pipeline: @pipeline %>
+          <%= live_component @socket, TellurideWeb.PipelineComponent, pipeline: @pipeline, metrics: @metrics %>
         </section>
       </div>
 

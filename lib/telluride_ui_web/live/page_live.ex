@@ -6,6 +6,7 @@ defmodule TellurideWeb.PageLive do
   alias Ecto.Changeset
   alias Telluride.Pipeline.Pipeline
   alias Telluride.PubSub.PipelineMetricsTopic
+  alias Telluride.PubSub.PipelineThroughputTopic
   alias Telluride.Messaging.PipelineConfigProducer
 
   ################################################################################
@@ -14,18 +15,23 @@ defmodule TellurideWeb.PageLive do
 
   @impl true
   def mount(_params, _session, socket) do
+
     PipelineMetricsTopic.subscribe()
+    PipelineThroughputTopic.subscribe()
+
     pipeline = Pipeline.new()
     changeset = change(pipeline)
+
     socket = socket
     |> assign(:changeset, changeset)
     |> assign(:pipeline, pipeline)
+    |> assign(:metrics, initial_metrics())
+
     {:ok, socket}
   end
 
   @impl true
   def handle_event("validate", args, socket) do
-    # IO.puts("handle_event(validate, #{inspect args})")
     changeset =
       Pipeline.new()
       |> Pipeline.changeset(args)
@@ -35,7 +41,6 @@ defmodule TellurideWeb.PageLive do
 
   @impl true
   def handle_event("save", args, socket) do
-    # IO.puts("handle_event(save, #{inspect args})")
     socket = case save_pipeline_config(args) do
       {:ok, pipeline} ->
         restart_pipeline(pipeline)
@@ -48,8 +53,12 @@ defmodule TellurideWeb.PageLive do
 
   @impl true
   def handle_info({:metric, event}, socket) do
-    # IO.puts("handle_info(:metric, #{inspect event})")
     {:noreply, update_node_status(event, socket)}
+  end
+
+  @impl true
+  def handle_info({:throughput, event}, socket) do
+    {:noreply, update_metrics(event, socket)}
   end
 
   ################################################################################
@@ -67,7 +76,7 @@ defmodule TellurideWeb.PageLive do
     end
   end
 
-  def restart_pipeline(pipeline) do
+  defp restart_pipeline(pipeline) do
     message = %{
       sensor_batcher_one_batch_size: pipeline.batcher1_batch_size,
       sensor_batcher_one_concurrency: pipeline.batcher1_concurrency,
@@ -120,5 +129,30 @@ defmodule TellurideWeb.PageLive do
   defp compute_status(microseconds) when microseconds <= 100_000, do: "border-normal"
   defp compute_status(microseconds) when microseconds > 100_000 and microseconds < 200_000, do: "border-warning"
   defp compute_status(microseconds) when microseconds >= 200_000, do: "border-error"
+
+  defp update_metrics(event, socket) do
+    %{
+      "earliest_raw_time" => earliest_raw_time, 
+      "last_raw_time" => last_raw_time, 
+      "total_failed_count" => total_failed_count, 
+      "total_message_count" => total_message_count, 
+      "total_successful_count" => total_successful_count
+    } = event
+
+    total_time_microseconds = last_raw_time - earliest_raw_time
+    throughput = total_message_count / total_time_microseconds
+
+    percent_successful = total_successful_count / total_message_count * 100.0
+
+    assign(socket, :metrics, %{throughput: throughput, total_message_count: total_message_count, percent_successful: percent_successful})
+  end
+
+  defp initial_metrics do
+    %{
+      throughput: 0,
+      total_message_count: 0,
+      percent_successful: 100.0
+    }
+  end
 
 end

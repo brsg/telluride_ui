@@ -15,7 +15,8 @@ defmodule Telluride.Application do
           :start_link,
           [[
             Telluride.Messaging.PipelineMetricConsumer,
-            Telluride.Messaging.PipelineConfigProducer
+            Telluride.Messaging.PipelineConfigProducer,
+            Telluride.Messaging.PipelineThroughputConsumer
           ]]
         }
       }
