@@ -1,8 +1,48 @@
-<!-- pre -->
-<!-- %= inspect @pipeline, pretty: true % -->
-<!-- /pre -->
+          <div class="bg-white shadow sm:rounded-lg p-3">
+            <div>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Pipeline Metrics
+              </h3>
+              <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                  <div class="px-4 py-5 sm:p-6">
+                    <dt class="text-sm font-medium text-gray-500 truncate">
+                      Messages / Second
+                    </dt>
+                    <dd class="mt-1 text-2xl font-semibold text-gray-900">
+                      <%= @metrics.throughput %>
+                    </dd>
+                  </div>
+                </div>
+
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                  <div class="px-4 py-5 sm:p-6">
+                    <dt class="text-sm font-medium text-gray-500 truncate">
+                      Total Messages
+                    </dt>
+                    <dd class="mt-1 text-2xl font-semibold text-gray-900">
+                      <%= @metrics.total_message_count %>
+                    </dd>
+                  </div>
+                </div>
+
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                  <div class="px-4 py-5 sm:p-6">
+                    <dt class="text-sm font-medium text-gray-500 truncate">
+                      % Successful
+                    </dt>
+                    <dd class="mt-1 text-2xl font-semibold text-gray-900">
+                      <%= @metrics.percent_successful %>%
+                    </dd>
+                  </div>
+                </div>
+
+              </dl>
+            </div>
+          </div>
 
           <div class="bg-white shadow sm:rounded-lg p-3">
+            <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Pipeline Status</h2>
 
             <!-- Producers -->
             <div class="m-4 bg-indigo-50">

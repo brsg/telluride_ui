@@ -12,9 +12,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        producer: '#000b4f',
-        processor: '#20368f',
-        batcher: '#829cd0',
+        producer: '#010e72',
+        processor: '#2239ab',
+        batcher: '#3c70cf',
         batchprocessor: '#6d6d6d',
         normal: '#00ff00',
         warning: '#ffff00',
