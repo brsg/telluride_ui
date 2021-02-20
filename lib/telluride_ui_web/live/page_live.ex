@@ -139,12 +139,13 @@ defmodule TellurideWeb.PageLive do
       "total_successful_count" => total_successful_count
     } = event
 
-    total_time_microseconds = last_raw_time - earliest_raw_time
-    throughput = total_message_count / total_time_microseconds
+    elapsed_time_monotonic = last_raw_time - earliest_raw_time
+    elapsed_time_seconds = :erlang.convert_time_unit(elapsed_time_monotonic, :native, :second)
+    messages_per_second = Float.round(total_message_count / elapsed_time_seconds, 1)
 
     percent_successful = total_successful_count / total_message_count * 100.0
 
-    assign(socket, :metrics, %{throughput: throughput, total_message_count: total_message_count, percent_successful: percent_successful})
+    assign(socket, :metrics, %{throughput: messages_per_second, total_message_count: total_message_count, percent_successful: percent_successful})
   end
 
   defp initial_metrics do
