@@ -18,12 +18,12 @@ defmodule Telluride.Pipeline.Pipeline do
 
   def new do
     %Pipeline{
-      producer_concurrency: 1,
-      processor_concurrency: 1,
-      batcher1_concurrency: 1,
-      batcher2_concurrency: 1,
-      batcher1_batch_size: 1,
-      batcher2_batch_size: 1,
+      producer_concurrency: 4,
+      processor_concurrency: 4,
+      batcher1_concurrency: 4,
+      batcher2_concurrency: 4,
+      batcher1_batch_size: 10,
+      batcher2_batch_size: 10,
       rate_limit_allowed: 50,
       rate_limit_interval: 1_000,
       node_status: %{}
