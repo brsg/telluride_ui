@@ -4,3 +4,19 @@ TellurideUI collaborates with [TelluridePipelime](https://github.com/brsg/tellur
 
 TellurideUI implements a [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view) dashboard that provides configuration and visualization of the Broadway pipeline.
 
+## Stack
+
+Elixir
+
+<img src="https://elixir-lang.org/images/logo/logo.png" height="60" />
+
+Phoenix Framework
+
+<img src="https://hexdocs.pm/phoenix/assets/logo.png" height="60" />
+
+RabbitMQ
+
+<img src="https://avatars.githubusercontent.com/u/96669?s=200&v=4" height="60" />
+
+with:
+* [amqp](https://github.com/pma/amqp) library
