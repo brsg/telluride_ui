@@ -154,7 +154,7 @@ defmodule TellurideWeb.PageLive do
     assign(socket, :metrics, %{throughput: messages_per_second, total_message_count: total_message_count, percent_successful: percent_successful})
   end
 
-  defp messages_per_second(total_message_count, elapsed_time_seconds) when total_message_count == 0, do: 0.0
+  defp messages_per_second(total_message_count, elapsed_time_seconds) when elapsed_time_seconds == 0, do: 0.0
   defp messages_per_second(total_message_count, elapsed_time_seconds) do
     Float.round(total_message_count / elapsed_time_seconds, 1)
   end
