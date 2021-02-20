@@ -20,7 +20,7 @@ defmodule Telluride.MixProject do
   def application do
     [
       mod: {Telluride.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -46,6 +46,7 @@ defmodule Telluride.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.4"},
       {:amqp, "~> 1.0" },
+      {:contex, "0.3.0"}
     ]
   end
 
