@@ -24,7 +24,7 @@ defmodule Telluride.Pipeline.Pipeline do
       batcher2_concurrency: 1,
       batcher1_batch_size: 1,
       batcher2_batch_size: 1,
-      rate_limit_allowed: 50,
+      rate_limit_allowed: 5_000,
       rate_limit_interval: 1_000,
       node_status: %{}
     }
