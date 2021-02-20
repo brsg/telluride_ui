@@ -6,17 +6,26 @@ TellurideUI implements a [Phoenix LiveView](https://github.com/phoenixframework/
 
 ## Stack
 
-Elixir
+[Elixir](https://elixir-lang.org/)
 
 <img src="https://elixir-lang.org/images/logo/logo.png" height="60" />
 
-Phoenix Framework
+[Phoenix Framework](https://www.phoenixframework.org/) (including [LiveView](https://github.com/phoenixframework/phoenix_live_view))
 
 <img src="https://hexdocs.pm/phoenix/assets/logo.png" height="60" />
 
-RabbitMQ
+[RabbitMQ](https://www.rabbitmq.com/)
 
 <img src="https://avatars.githubusercontent.com/u/96669?s=200&v=4" height="60" />
 
+[Tailwind CSS 2](https://tailwindcss.com/)
+
+<img src="https://raw.githubusercontent.com/github/explore/882462b8ecc337fd9c9b2572bc463a1cbc88fb6a/topics/tailwind/tailwind.png" height="60" />
+
+[Alpine JS](https://github.com/alpinejs)
+
+<img src="https://avatars.githubusercontent.com/u/59030169?s=200&v=4" height="60" />
+
 with:
 * [amqp](https://github.com/pma/amqp) library
+* [TailwindUI](https://tailwindui.com)
