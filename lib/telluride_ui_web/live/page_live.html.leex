@@ -1,13 +1,14 @@
   <main>
     <div class="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-5">
 
-      <section aria-labelledby="timeline-title" class="lg:col-start-1 lg:col-span-2">
+      <section aria-labelledby="pipeline-config" class="lg:col-start-1 lg:col-span-2">
         <%= live_component @socket, TellurideWeb.SettingsComponent, changeset: @changeset %>
       </section>
 
       <div class="space-y-6 lg:col-start-3 lg:col-span-3">
-        <section aria-labelledby="applicant-information-title">
+        <section aria-labelledby="pipeline-visualization">
           <%= live_component @socket, TellurideWeb.PipelineComponent, pipeline: @pipeline, metrics: @metrics %>
+          <%= live_component @socket, TellurideWeb.CpuMetricsComponent, id: :cpu_metrics %>
         </section>
       </div>
 

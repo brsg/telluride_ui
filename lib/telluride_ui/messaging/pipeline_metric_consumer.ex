@@ -112,15 +112,12 @@ defmodule Telluride.Messaging.PipelineMetricConsumer do
   defp consume(channel, delivery_tag, _redelivered, payload) do
     case Jason.decode(payload) do
       {:ok, event_info} ->
-        IO.puts("PipelineMetricConsumer.consume - received #{inspect event_info}")
         Telluride.PubSub.PipelineMetricsTopic.publish(event_info)
         AMQP.Basic.ack(channel, delivery_tag)
       {:error, reason} ->
         Basic.reject channel, delivery_tag, requeue: false
-        IO.puts("PipelineMetricConsumer.consume - error '#{inspect reason}' processing payload: #{inspect payload}")
       err ->
         Basic.reject channel, delivery_tag, requeue: false
-        IO.puts("PipelineMetricConsumer.consume - error '#{inspect err}'' processing payload: #{inspect payload}")
         err
     end
   end
