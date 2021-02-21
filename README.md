@@ -40,7 +40,7 @@ If you need help with your Elixir projects, contact <info@brsg.io> or visit <htt
 
 ## Acknowledgements
 
-This project was inspired by Marlus Saraiva's ElixirConf 2019 talk [Build Efficient Data Processing Pipelines](https://youtu.be/tPu-P97-cbE).
+This project was inspired by Marlus Saraiva's ElixirConf 2018 talk [Build Efficient Data Processing Pipelines](https://youtu.be/tPu-P97-cbE).
 
 
 ## License and Copyright
