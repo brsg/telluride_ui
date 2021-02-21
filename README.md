@@ -32,3 +32,28 @@ TellurideUI implements a [Phoenix LiveView](https://github.com/phoenixframework/
 with:
 * [amqp](https://github.com/pma/amqp) library
 * [TailwindUI](https://tailwindui.com)
+
+## Consulting or Partnership
+
+If you need help with your Elixir projects, contact <info@brsg.io> or visit <https://brsg.io>.
+
+## Acknowledgements
+
+This project was inspired by Marlus Saraiva's ElixirConf 2019 talk [Build Efficient Data Processing Pipelines](https://youtu.be/tPu-P97-cbE).
+
+
+## License and Copyright
+
+Copyright 2021 - Blue River Systems Group, LLC - All Rights Reeserved
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
