@@ -4,7 +4,8 @@ TellurideUI collaborates with [TelluridePipelime](https://github.com/brsg/tellur
 
 TellurideUI implements a [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view) dashboard that provides configuration and visualization of the Broadway pipeline. Here's an example screenshot:
 
-<img src="images/screenshot.png" />
+<img src="assets/static/images/screenshot.png" height="400" />
+<a href="assets/static/images/screenshot.png" target="_blank">Full Size</a>
 
 
 ## Stack
