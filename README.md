@@ -7,6 +7,7 @@ TellurideUI implements a [Phoenix LiveView](https://github.com/phoenixframework/
 <img src="assets/static/images/screenshot.png" height="400" />
 <a href="assets/static/images/screenshot.png" target="_blank">Full Size</a>
 
+See [Getting Started](#getting-started) below for instructions on starting this example.
 
 ## Stack
 
@@ -33,6 +34,49 @@ TellurideUI implements a [Phoenix LiveView](https://github.com/phoenixframework/
 with:
 * [amqp](https://github.com/pma/amqp) library
 * [TailwindUI](https://tailwindui.com)
+
+## <a name="getting-started"></a> Getting Started
+
+1. Start RabbitMQ.
+
+A `docker-compose.yaml` that includes RabbitMQ is provided in `telluride_pipeline`. Start RabbitMQ by executing:
+
+```elixir
+cd telluride_pipeline/
+docker-compose up -d
+```
+
+2. Start [TelluridePipeline](https://github.com/brsg/telluride_pipeline) by executing:
+
+```Elixir
+cd telluride_pipeline/
+iex -S mix
+```
+
+and then, from within iex, execute:
+
+```
+TelluridePipeline.TelemetryBroadwayManager.start_or_replace_telluride_pipeline/1
+```
+
+To run the `telluride_pipeline` tests:
+
+```elixir
+mix test --only telemetry_broadway
+```
+
+3. Start [TellurideSensor](https://github.com/brsg/telluride_sensor) by executing:
+
+```elixir
+cd telluride_sensor/
+iex -S mix
+```
+
+4. Start [TellurideUI](https://github.com/brsg/telluride_ui) by executing:
+```Elixir
+cd telluride_ui/
+iex -S mix
+```
 
 ## Consulting or Partnership
 
