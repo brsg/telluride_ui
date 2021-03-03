@@ -53,12 +53,6 @@ cd telluride_pipeline/
 iex -S mix
 ```
 
-and then, from within iex, execute:
-
-```
-TelluridePipeline.TelemetryBroadwayManager.start_or_replace_telluride_pipeline/1
-```
-
 To run the `telluride_pipeline` tests:
 
 ```elixir
