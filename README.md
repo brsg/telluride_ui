@@ -71,6 +71,7 @@ iex -S mix
 cd telluride_ui/
 mix phx.server
 ```
+and then point your browser at http://localhost:4000
 
 ## Consulting or Partnership
 
