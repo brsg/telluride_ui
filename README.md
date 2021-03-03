@@ -69,7 +69,7 @@ iex -S mix
 4. Start [TellurideUI](https://github.com/brsg/telluride_ui) by executing:
 ```Elixir
 cd telluride_ui/
-iex -S mix
+mix phx.server
 ```
 
 ## Consulting or Partnership
