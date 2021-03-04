@@ -125,8 +125,8 @@ defmodule TellurideWeb.PageLive do
     socket
   end
 
-  defp update_node_status(key, %{"mean_duration" => mean_duration} = event, socket) do
-    status = compute_status(mean_duration)
+  defp update_node_status(key, %{"sma_duration" => sma_duration} = event, socket) do
+    status = compute_status(sma_duration)
     pipeline = socket.assigns.pipeline
     pipeline = put_in(pipeline.node_status[key], status)
     assign(socket, :pipeline, pipeline)
