@@ -8,7 +8,7 @@
               </div>
               <div class="flex flex-wrap justify-center">
                 <%= for num <- 1..@pipeline.producer_concurrency do %>
-                <div class="<%= @pipeline.node_status["producer_#{num-1}"] %> m-4 h-16 w-16 text-4xl text-center text-white border-8 bg-producer">
+                <div class="<%= @pipeline.node_status["producer_#{num-1}"] %> m-2 h-16 w-16 text-4xl text-center text-white border-8 bg-producer">
                   <%= num %>
                 </div>
                 <% end %>
@@ -22,7 +22,7 @@
               </div>
               <div class="flex flex-wrap justify-center">
                 <%= for num <- 1..@pipeline.processor_concurrency do %>
-                <div class="<%= @pipeline.node_status["processor_#{num-1}"] %> m-4 h-16 w-16 text-4xl text-center text-white border-8 bg-processor"><%= num %></div>
+                <div class="<%= @pipeline.node_status["processor_#{num-1}"] %> m-2 h-16 w-16 text-4xl text-center text-white border-8 bg-processor"><%= num %></div>
                 <% end %>
               </div>
             </div>
@@ -32,94 +32,51 @@
 
               <!-- Batcher 1 -->
               <div class="w-1/2">
-                <div class="m-4 bg-indigo-50">
+                <div class="m-4 pb-2 bg-indigo-50">
                   <div class="bg-batcher text-white text-center">
-                    <h1>Batcher 1</h1>
+                    <h1>Batcher</h1>
                   </div>
                   <div class="flex flex-wrap justify-center">
-                    <div class="<%= @pipeline.node_status["batcher_1"] %> m-4 h-16 w-16 text-4xl text-center text-white border-8 bg-batcher ">1</div>
+                    <div class="<%= @pipeline.node_status["batcher_1"] %> m-2 h-16 w-16 text-4xl text-center text-white border-8 bg-batcher ">1</div>
                   </div>
-                </div>
-                <div class="m-4 bg-indigo-50">
-                  <div class="bg-batchprocessor text-white text-center">
-                    <h1>Batch Processors</h1>
-                  </div>
-                  <div class="flex flex-wrap justify-center">
-                    <%= for num <- 1..@pipeline.batcher1_concurrency do %>
-                    <div class="<%= @pipeline.node_status["batcher_1_processor_#{num-1}"] %> m-4 h-16 w-16 text-4xl text-center text-white border-8 bg-batchprocessor">
-                      <%= num %>
+                  <div class="m-4 bg-indigo-50 border-gray-300 border-solid border-2 border-opacity-40">
+                    <div class="bg-batchprocessor text-white text-center">
+                      <h1>Batch Processors</h1>
                     </div>
-                    <% end %>
+                    <div class="flex flex-wrap justify-center">
+                      <%= for num <- 1..@pipeline.batcher1_concurrency do %>
+                      <div class="<%= @pipeline.node_status["batcher_1_processor_#{num-1}"] %> m-2 h-16 w-16 text-4xl text-center text-white border-8 bg-batchprocessor">
+                        <%= num %>
+                      </div>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <!-- Batcher 2 -->
               <div class="w-1/2">
-                <div class="m-4 bg-indigo-50">
+                <div class="m-4 pb-2 bg-indigo-50">
                   <div class="bg-batcher text-white text-center">
-                    <h1>Batcher 2</h1>
+                    <h1>Batcher</h1>
                   </div>
                   <div class="flex flex-wrap justify-center">
-                    <div class="<%= @pipeline.node_status["batcher_2"] %> m-4 h-16 w-16 text-4xl text-center text-white border-8 bg-batcher">2</div>
-                  </div>
-                </div>
-                <div class="m-4 bg-indigo-50">
-                  <div class="bg-batchprocessor text-white text-center">
-                    <h1>Batch Processors</h1>
-                  </div>
-                  <div class="flex flex-wrap justify-center">
-                    <%= for num <- 1..@pipeline.batcher2_concurrency do %>
-                    <div class="<%= @pipeline.node_status["batcher_2_processor_#{num-1}"] %>  m-4 h-16 w-16 text-4xl text-center text-white border-8 bg-batchprocessor">
-                      <%= num %>
+                    <div class="<%= @pipeline.node_status["batcher_2"] %> m-2 h-16 w-16 text-4xl text-center text-white border-8 bg-batcher">2</div>
+                    <div class="m-4 bg-indigo-50 border-gray-300 border-solid border-2 border-opacity-40">
+                      <div class="bg-batchprocessor text-white text-center">
+                        <h1>Batch Processors</h1>
+                      </div>
+                      <div class="flex flex-wrap justify-center">
+                        <%= for num <- 1..@pipeline.batcher2_concurrency do %>
+                        <div class="<%= @pipeline.node_status["batcher_2_processor_#{num-1}"] %>  m-2 h-16 w-16 text-4xl text-center text-white border-8 bg-batchprocessor">
+                          <%= num %>
+                        </div>
+                        <% end %>
+                      </div>
                     </div>
-                    <% end %>
                   </div>
                 </div>
               </div>
 
-            </div>
-          </div>
-
-          <div class="bg-white shadow sm:rounded-lg p-3">
-            <div>
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Pipeline Metrics
-              </h3>
-              <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                  <div class="px-4 py-5 sm:p-6">
-                    <dt class="text-sm font-medium text-gray-500 truncate">
-                      Messages / Second
-                    </dt>
-                    <dd class="mt-1 text-2xl font-semibold text-gray-900">
-                      <%= @metrics.throughput %>
-                    </dd>
-                  </div>
-                </div>
-
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                  <div class="px-4 py-5 sm:p-6">
-                    <dt class="text-sm font-medium text-gray-500 truncate">
-                      Total Messages
-                    </dt>
-                    <dd class="mt-1 text-2xl font-semibold text-gray-900">
-                      <%= @metrics.total_message_count %>
-                    </dd>
-                  </div>
-                </div>
-
-                <div class="bg-white overflow-hidden shadow rounded-lg">
-                  <div class="px-4 py-5 sm:p-6">
-                    <dt class="text-sm font-medium text-gray-500 truncate">
-                      % Successful
-                    </dt>
-                    <dd class="mt-1 text-2xl font-semibold text-gray-900">
-                      <%= @metrics.percent_successful %>%
-                    </dd>
-                  </div>
-                </div>
-
-              </dl>
             </div>
           </div>

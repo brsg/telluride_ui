@@ -1,4 +1,4 @@
-defmodule TellurideWeb.CpuMetricsComponent do
+defmodule TellurideWeb.CpuUtilizationComponent do
   use Phoenix.LiveComponent
   use Phoenix.HTML
 
@@ -62,9 +62,9 @@ defmodule TellurideWeb.CpuMetricsComponent do
     socket
     |> assign(
       :chart_svg,
-      Plot.new(250, 200, chart)
+      Plot.new(280, 200, chart)
       |> Plot.plot_options(options)
-      |> Plot.titles("CPU Utilization", "% of CPU Cycles Used, By Core")
+      # |> Plot.titles("CPU Utilization", "% of CPU Cycles Used, By Core")
       |> Plot.axis_labels("CPU", "% Utilization")
       |> Plot.to_svg())
   end

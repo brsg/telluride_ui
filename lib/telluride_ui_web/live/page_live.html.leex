@@ -3,12 +3,13 @@
 
       <section aria-labelledby="pipeline-config" class="lg:col-start-1 lg:col-span-2">
         <%= live_component @socket, TellurideWeb.SettingsComponent, changeset: @changeset %>
+        <%= live_component @socket, TellurideWeb.CpuUtilizationComponent, id: :cpu_metrics %>
       </section>
 
       <div class="space-y-6 lg:col-start-3 lg:col-span-3">
         <section aria-labelledby="pipeline-visualization">
+          <%= live_component @socket, TellurideWeb.PipelineMetricsComponent, metrics: @metrics %>
           <%= live_component @socket, TellurideWeb.PipelineComponent, pipeline: @pipeline, metrics: @metrics %>
-          <%= live_component @socket, TellurideWeb.CpuMetricsComponent, id: :cpu_metrics %>
         </section>
       </div>
 
