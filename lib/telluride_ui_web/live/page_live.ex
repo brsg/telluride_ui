@@ -63,7 +63,7 @@ defmodule TellurideWeb.PageLive do
 
   @impl true
   def handle_info(:monitor, socket) do
-    send_update TellurideWeb.CpuMetricsComponent, id: :cpu_metrics
+    send_update TellurideWeb.CpuUtilizationComponent, id: :cpu_metrics
     {:noreply, socket}
   end
 
